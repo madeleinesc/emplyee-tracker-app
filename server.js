@@ -28,7 +28,7 @@ const db = mysql.createConnection(
 // async function/user prompts
 async function init() {
   //prompt user to choose an option
-  await inquirer.prompt({
+  const data = await inquirer.prompt({
     type: 'list',
     name: 'menu',
     message: "Please choose from the following options:",
@@ -91,6 +91,14 @@ async function init() {
 }
 
 // function for allDepartments
+async function allDepartments() {
+  db.query('SELECT departments.dpt_name AS Department, departments.id AS DepartmentId FROM departments', function(err, results) {
+    if (err) throw err;
+    console.log("Now viewing all departments:")
+    console.table(results);
+    init()
+  })
+}
 
 
 //function for allRoles
