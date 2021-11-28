@@ -5,7 +5,9 @@ const mysql = require('mysql2');
 // import inquirer package
 const inquirer = require('inquirer');
 // import console.table package
-require('console.table');
+const consoleTbl = require('console.table');
+
+
 
 
 // create connection to database
@@ -18,75 +20,96 @@ const db = mysql.createConnection(
     database: process.env.DB_NAME
   },
   console.log(
-    `Connected to employee database.`
+    `=== WELCOME TO THE EMPLOYEE TRACKER ===`
   )
 );
 
 
 // async function/user prompts
+async function init() {
+  //prompt user to choose an option
+  await inquirer.prompt({
+    type: 'list',
+    name: 'menu',
+    message: "Please choose from the following options:",
+    choices: [
+      'View all departments',
+      'View all roles',
+      'View all employees',
+      'Add a department',
+      'Add a role',
+      'Add an employee',
+      'Update an employees role',
+      'Exit'
+    ]
+  });
+  switch(data.menu) {
+    case 'View all departments':
+      // code block
+      allDepartments();
+      break;
+    
+    case 'View all roles':
+      // code block
+      allRoles();
+      break;
 
+    case 'View all employees':
+      // code block
+      allEmployees();
+      // breaks out of switch block
+      break;
+
+    case 'Add a department':
+      // code block
+      addDepartment();
+      // breaks out of switch block
+      break;
+
+    case 'Add a role':
+      // code block
+      addRole();
+      // breaks out of switch block
+      break;
+
+    case 'Add am employee':
+      // code block
+      addEmployee();
+      // breaks out of switch block
+      break;
+
+    case 'Update a employees role':
+      // code block
+      UpdateEmployee();
+      // breaks out of switch block
+      break;
+
+    case 'Exit':
+      connection.end();
+      break; 
+  }
+}
+
+// function for allDepartments
+
+
+//function for allRoles
+
+//function for allEmployees
+
+//function for newDepartment
+
+//function for newRole
+
+//function for newEmployee
+
+//function for updateEmployee
 
 // initialise app
-async function init() {
-
-  // start menu
-  start = () => {
-    //prompt user to choose an option
-    return inquirer.prompt([
-      {
-        type: 'list',
-        name: 'menu',
-        message: "Welcome to the Employee Tracker App! Please choose from the following options:",
-        choices: [
-          'View all departments',
-          'View all roles',
-          'View all employees',
-          'Add a department',
-          'Add a role',
-          'Add an employee',
-          'Update an employees role',
-          'Exit'
-        ]
-      }
-    ])
-  }; 
-  start()
-
-    .then(function(data) {
-      if (data.start === 'View all departments') return allDepartments();
-
-      if (data.start === 'View all roles') return allRoles();
-
-      if (data.start === 'View all employees') return allEmployees();
-
-      if (data.start === 'Add a department') return newDepartment();
-
-      if (data.start === 'Add a role') return newRole();
-
-      if (data.start === 'Add an employee') return newEmployee();
-
-      if (data.start === 'Update an employees role') return updateEmployee();
-
-    })
-};
-init();
+init()
 
 
-// queries
 
-//function for allDepartments
-
-//async function for allRoles
-
-//async function for allEmployees
-
-//async function for newDepartment
-
-//async function for newRole
-
-//async function for newEmployee
-
-//async function for updateEmployee
 
 
 
