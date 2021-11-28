@@ -72,10 +72,23 @@ async function init() {
 init();
 
 
-
-
-
 // queries
+
+//function for allDepartments
+
+//async function for allRoles
+
+//async function for allEmployees
+
+//async function for newDepartment
+
+//async function for newRole
+
+//async function for newEmployee
+
+//async function for updateEmployee
+
+
 
 // module export
 
