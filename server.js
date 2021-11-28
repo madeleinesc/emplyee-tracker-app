@@ -31,6 +31,7 @@ async function init() {
 
   // start menu
   start = () => {
+    //prompt user to choose an option
     return inquirer.prompt([
       {
         type: 'list',
@@ -48,18 +49,33 @@ async function init() {
         ]
       }
     ])
+  }; 
+  start()
+
+    .then(function(data) {
+      if (data.start === 'View all departments') return allDepartments();
+
+      if (data.start === 'View all roles') return allRoles();
+
+      if (data.start === 'View all employees') return allEmployees();
+
+      if (data.start === 'Add a department') return newDepartment();
+
+      if (data.start === 'Add a role') return newRole();
+
+      if (data.start === 'Add an employee') return newEmployee();
+
+      if (data.start === 'Update an employees role') return updateEmployee();
+
+    })
 };
-const answer = await start();
-
-// queries
-
-
-
-}
-
 init();
 
 
+
+
+
+// queries
 
 // module export
 
