@@ -48,15 +48,15 @@ async function init() {
         ]
       }
     ])
-
-    
 };
+const answer = await start();
 
 // queries
 
 
 
 }
+
 init();
 
 
