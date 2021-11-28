@@ -6,7 +6,7 @@ USE employee_db;
 -- Create table for department
 CREATE TABLE departments (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL
+    dpt_name VARCHAR(30) NOT NULL
 );
 
 -- Create table for employee roles
@@ -25,9 +25,7 @@ CREATE TABLE employees (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
-    title VARCHAR(30),
     role_id INT,
-    salary DECIMAL,
     manager_id INT,
     FOREIGN KEY (manager_id)
     REFERENCES employees(id)
