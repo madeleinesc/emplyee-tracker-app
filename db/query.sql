@@ -19,6 +19,14 @@ ON roles.dpt_id = departments.id
 ORDER BY employees.id;
 
 
+INSERT INTO roles (title, salary, dpt_id) VALUES (?, ?, ?)
+
+SELECT * FROM roles
+
+INSERT INTO employees (first_name, last_name, role_id) VALUES (?, ?, ?)
+
+SELECT * FROM employees
+
 
 
 

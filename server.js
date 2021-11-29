@@ -8,8 +8,6 @@ const inquirer = require('inquirer');
 const consoleTbl = require('console.table');
 
 
-
-
 // create connection to database
 const db = mysql.createConnection(
   {
@@ -25,7 +23,7 @@ const db = mysql.createConnection(
 );
 
 
-// async function/user prompts
+// async function -> start nenu
 async function init() {
   //prompt user to choose an option
   const data = await inquirer.prompt({
@@ -43,15 +41,18 @@ async function init() {
       'Exit'
     ]
   });
+  // switch conditional statment to execute code blocks
   switch(data.menu) {
     case 'View all departments':
       // code block
       allDepartments();
+      // breaks out of switch block
       break;
     
     case 'View all roles':
       // code block
       allRoles();
+      // breaks out of switch block
       break;
 
     case 'View all employees':
@@ -86,12 +87,14 @@ async function init() {
 
     case 'Exit':
       connection.end();
+      // breaks out of switch block
       break; 
   }
 }
 
 // function for allDepartments
 async function allDepartments() {
+  // sql query for database -> in query.sql file
   db.query('SELECT departments.dpt_name AS Department, departments.id AS DepartmentId FROM departments', function(err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL DEPARTMENTS IN DATABASE ===")
@@ -103,6 +106,7 @@ async function allDepartments() {
 
 //function for allRoles
 async function allRoles() {
+  // sql query for database -> in query.sql file
   db.query('SELECT roles.id AS RoleId, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department FROM roles JOIN departments ON roles.dpt_id = departments.id', function (err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL ROLES IN DATABASE ===")
@@ -114,6 +118,7 @@ async function allRoles() {
 
 //function for allEmployees
 async function allEmployees() {
+  // sql query for database -> in query.sql file
   db.query('SELECT employees.id AS EmployeeId, employees.first_name AS FirstName, employees.last_name AS LastName, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department, employees.manager_id AS ManagerId FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.dpt_id = departments.id ORDER BY employees.id', function (err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL EMPLOYEES IN DATABASE ===")
@@ -135,7 +140,9 @@ function addDepartment() {
       message: 'Please enter a new department'
     }
   ]).then(function (answer) {
+    // sql query for database -> in query.sql file
     db.query('INSERT INTO departments (dpt_name) VALUES (?)', [answer.addDepartment], function (err, results) {
+      // to get all data from departments table
       const query = 'SELECT * FROM departments';
       db.query(query, function (err, results) {
         if (err) throw err;
@@ -177,7 +184,9 @@ function addRole() {
       message: 'Please enter the department the role is in'
     }
   ]).then(function (answer) {
+    // sql query for database -> in query.sql file
     db.query('INSERT INTO roles (title, salary, dpt_id) VALUES (?, ?, ?)', [answer.addRole, answer.salary, answer.department], function (err, results) {
+      // to get all data from roles table
       const query = 'SELECT * FROM roles';
       db.query(query, function (err, results) {
         if (err){
@@ -235,7 +244,7 @@ function addEmployee() {
 //function for updateEmployee
 
 
-// function for exit application
+
 
 
 
