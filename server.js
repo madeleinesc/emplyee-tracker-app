@@ -100,7 +100,6 @@ async function allDepartments() {
   })
 }
 
-
 //function for allRoles
 
 //function for allEmployees
