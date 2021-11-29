@@ -72,7 +72,7 @@ async function init() {
       // breaks out of switch block
       break;
 
-    case 'Add am employee':
+    case 'Add an employee':
       // code block
       addEmployee();
       // breaks out of switch block
@@ -194,9 +194,48 @@ function addRole() {
 }
 
 //function for addEmployee
-
+function addEmployee() {
+  //prompts -> user input
+  inquirer.prompt([
+    {
+      // to get name of new employee
+      type: 'input',
+      name: 'firstName',
+      message: 'Please enter new employees first name'
+    },
+    {
+      // to get last name of new employee
+      type: 'input',
+      name: 'lastName',
+      message: 'Please enter new employees last name',
+    },
+    {
+      // to get new employees role (int)
+      type: 'input',
+      name: 'role',
+      message: 'Please enter the employees role id:'
+    }
+  ]).then(function (answer) {
+    db.query('INSERT INTO employees (first_name, last_name, role_id) VALUES (?, ?, ?)', [answer.firstName, answer.lastName, answer.role], function (err, results) {
+      const query = 'SELECT * FROM employees';
+      db.query(query, function (err, results) {
+        if (err){
+          console.log(err)
+          throw err;
+        } 
+        console.log("=== EMPLOYEE HAS BEEN ADDDED ===")
+        // print results in a table
+        console.table(results);
+        init()
+      })
+    })
+  })
+}
 
 //function for updateEmployee
+
+
+// function for exit application
 
 
 
