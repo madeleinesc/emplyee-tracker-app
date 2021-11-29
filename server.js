@@ -95,6 +95,7 @@ async function allDepartments() {
   db.query('SELECT departments.dpt_name AS Department, departments.id AS DepartmentId FROM departments', function(err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL DEPARTMENTS IN DATABASE ===")
+    // print results in a table
     console.table(results);
     init()
   })
@@ -105,6 +106,7 @@ async function allRoles() {
   db.query('SELECT roles.id AS RoleId, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department FROM roles JOIN departments ON roles.dpt_id = departments.id', function (err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL ROLES IN DATABASE ===")
+    // print results in a table
     console.table(results);
     init()
   })
@@ -115,6 +117,7 @@ async function allEmployees() {
   db.query('SELECT employees.id AS EmployeeId, employees.first_name AS FirstName, employees.last_name AS LastName, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department, employees.manager_id AS ManagerId FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.dpt_id = departments.id ORDER BY employees.id', function (err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL EMPLOYEES IN DATABASE ===")
+    // print results in a table
     console.table(results);
     init()
   })
@@ -123,8 +126,10 @@ async function allEmployees() {
 
 //function for addDepartment
 function addDepartment() {
+  // prompt -> user input
   inquirer.prompt([
     {
+      // to get name of new department
       type: 'input',
       name: 'addDepartment',
       message: 'Please enter a new department'
@@ -135,6 +140,7 @@ function addDepartment() {
       db.query(query, function (err, results) {
         if (err) throw err;
         console.log("=== DEPARTMENT HAS BEEN ADDDED ===")
+        // print results in a table
         console.table(results);
         addDepartment()
         init()
@@ -146,13 +152,16 @@ function addDepartment() {
 
 //function for addRole
 function addRole() {
+  //prompts -> user input
   inquirer.prompt([
     {
+      // to get name of new role
       type: 'input',
       name: 'addRole',
       message: 'Please enter a new role'
     },
     {
+      // to get salary (must be int)
       type: 'input',
       name: 'salary',
       message: 'Please enter a salary figure:',
@@ -162,18 +171,22 @@ function addRole() {
       }
     },
     {
+      // to get department id (must be int)
       type: 'input',
       name: 'department',
       message: 'Please enter the department the role is in'
     }
   ]).then(function (answer) {
-    db.query('INSERT INTO departments (name) VALUES (?)', [answer.addRole], function (err, results) {
-      const query = 'SELECT * FROM departments';
+    db.query('INSERT INTO roles (title, salary, dpt_id) VALUES (?, ?, ?)', [answer.addRole, answer.salary, answer.department], function (err, results) {
+      const query = 'SELECT * FROM roles';
       db.query(query, function (err, results) {
-        if (err) throw err;
+        if (err){
+          console.log(err)
+          throw err;
+        } 
         console.log("=== ROLE HAS BEEN ADDDED ===")
+        // print results in a table
         console.table(results);
-        addRole()
         init()
       })
     })
@@ -182,17 +195,16 @@ function addRole() {
 
 //function for addEmployee
 
+
 //function for updateEmployee
+
+
 
 // initialise app
 init()
 
 
 
-
-
-
-// module export
 
 
 
