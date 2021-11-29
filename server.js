@@ -121,7 +121,7 @@ async function allEmployees() {
 }
 
 
-//function for newDepartment
+//function for addDepartment
 function addDepartment() {
   inquirer.prompt([
     {
@@ -130,8 +130,8 @@ function addDepartment() {
       message: 'Please enter a new department'
     }
   ]).then(function (answer) {
-    db.query('INSERT INTO departments (name) VALUES (?)', [answer.newDepartment], function (err, results) {
-      const query = 'SELECT * FROM department';
+    db.query('INSERT INTO departments (dpt_name) VALUES (?)', [answer.addDepartment], function (err, results) {
+      const query = 'SELECT * FROM departments';
       db.query(query, function (err, results) {
         if (err) throw err;
         console.log("=== DEPARTMENT HAS BEEN ADDDED ===")
@@ -144,10 +144,43 @@ function addDepartment() {
 }
 
 
-//function for newRole
+//function for addRole
+function addRole() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'addRole',
+      message: 'Please enter a new role'
+    },
+    {
+      type: 'input',
+      name: 'salary',
+      message: 'Please enter a salary figure:',
+      validate: value => {
+        if(isNaN(value) === false) return true;
+        return false;
+      }
+    },
+    {
+      type: 'input',
+      name: 'department',
+      message: 'Please enter the department the role is in'
+    }
+  ]).then(function (answer) {
+    db.query('INSERT INTO departments (name) VALUES (?)', [answer.addRole], function (err, results) {
+      const query = 'SELECT * FROM departments';
+      db.query(query, function (err, results) {
+        if (err) throw err;
+        console.log("=== ROLE HAS BEEN ADDDED ===")
+        console.table(results);
+        addRole()
+        init()
+      })
+    })
+  })
+}
 
-
-//function for newEmployee
+//function for addEmployee
 
 //function for updateEmployee
 
