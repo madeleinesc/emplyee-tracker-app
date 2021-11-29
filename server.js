@@ -101,6 +101,14 @@ async function allDepartments() {
 }
 
 //function for allRoles
+async function allRoles() {
+  db.query('SELECT roles.id AS RoleId, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department FROM roles JOIN departments ON roles.dpt_id = departments.id', function (err, results) {
+    if (err) throw err;
+    console.log("Now viewing all employee roles:")
+    console.table(results);
+    init()
+  })
+}
 
 //function for allEmployees
 
