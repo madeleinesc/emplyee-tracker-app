@@ -4,7 +4,6 @@ SELECT departments.id AS DepartmentId, departments.dpt_name AS Department
 FROM departments;
 
 
-
 SELECT roles.id AS RoleId, roles.title AS Title,  roles.salary AS Salary, departments.dpt_name AS Department
 FROM roles
 JOIN departments 
