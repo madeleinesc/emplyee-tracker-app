@@ -94,7 +94,7 @@ async function init() {
 async function allDepartments() {
   db.query('SELECT departments.dpt_name AS Department, departments.id AS DepartmentId FROM departments', function(err, results) {
     if (err) throw err;
-    console.log("Now viewing all departments:")
+    console.log("=== NOW VIEWING ALL DEPARTMENTS IN DATABASE ===")
     console.table(results);
     init()
   })
@@ -104,13 +104,22 @@ async function allDepartments() {
 async function allRoles() {
   db.query('SELECT roles.id AS RoleId, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department FROM roles JOIN departments ON roles.dpt_id = departments.id', function (err, results) {
     if (err) throw err;
-    console.log("Now viewing all employee roles:")
+    console.log("=== NOW VIEWING ALL ROLES IN DATABASE ===")
     console.table(results);
     init()
   })
 }
 
 //function for allEmployees
+async function allEmployees() {
+  db.query('SELECT employees.id AS EmployeeId, employees.first_name AS FirstName, employees.last_name AS LastName, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department, employees.manager_id AS ManagerId FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.dpt_id = departments.id ORDER BY employees.id', function (err, results) {
+    if (err) throw err;
+    console.log("=== NOW VIEWING ALL EMPLOYEES IN DATABASE ===")
+    console.table(results);
+    init()
+  })
+}
+
 
 //function for newDepartment
 
