@@ -122,8 +122,30 @@ async function allEmployees() {
 
 
 //function for newDepartment
+function addDepartment() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'addDepartment',
+      message: 'Please enter a new department'
+    }
+  ]).then(function (answer) {
+    db.query('INSERT INTO departments (name) VALUES (?)', [answer.newDepartment], function (err, results) {
+      const query = 'SELECT * FROM department';
+      db.query(query, function (err, results) {
+        if (err) throw err;
+        console.log("=== DEPARTMENT HAS BEEN ADDDED ===")
+        console.table(results);
+        addDepartment()
+        init()
+      })
+    })
+  })
+}
+
 
 //function for newRole
+
 
 //function for newEmployee
 
