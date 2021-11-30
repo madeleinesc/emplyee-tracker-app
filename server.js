@@ -244,12 +244,8 @@ function addEmployee() {
 }
 
 
-//function for updateEmployee
-// need to still do
-
-
-// function to exit out of app
-
+// function for updateEmployee
+// need to still do!
 
 
 // initialise app
