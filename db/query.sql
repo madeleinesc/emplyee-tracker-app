@@ -1,16 +1,16 @@
 USE employee_db
 
-SELECT departments.id AS DepartmentId, departments.dpt_name AS Department
+SELECT departments.id AS Id, departments.dpt_name AS Department
 FROM departments;
 
 
-SELECT roles.id AS RoleId, roles.title AS Role,  roles.salary AS Salary, departments.dpt_name AS Department
+SELECT roles.id AS Id, roles.salary AS Salary, roles.title AS Role,  departments.dpt_name AS Department 
 FROM roles
 JOIN departments 
 ON roles.dpt_id = departments.id;
 
 
-SELECT employees.id AS EmployeeId, employees.first_name AS FirstName, employees.last_name AS LastName, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department, employees.manager_id AS ManagerId
+SELECT employees.id AS Id, employees.first_name AS FirstName, employees.last_name AS LastName, roles.salary AS Salary, roles.title AS Role,  departments.dpt_name AS Department, employees.manager_id AS ManagerId
 FROM employees
 JOIN roles
 ON employees.role_id = roles.id
@@ -19,13 +19,7 @@ ON roles.dpt_id = departments.id
 ORDER BY employees.id;
 
 
-INSERT INTO roles (title, salary, dpt_id) VALUES (?, ?, ?)
 
-SELECT * FROM roles
-
-INSERT INTO employees (first_name, last_name, role_id) VALUES (?, ?, ?)
-
-SELECT * FROM employees
 
 
 

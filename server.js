@@ -79,15 +79,16 @@ async function init() {
       // breaks out of switch block
       break;
 
-    case 'Update a employees role':
+    case 'Update an employees role':
       // code block
-      UpdateEmployee();
+      updateEmployee();
       // breaks out of switch block
       break;
 
     case 'Exit':
-      connection.end();
-      // breaks out of switch block
+      db.end();
+      // exits application
+      process.exit(0);
       break; 
   }
 }
@@ -95,7 +96,7 @@ async function init() {
 // function for allDepartments
 async function allDepartments() {
   // sql query for database -> in query.sql file
-  db.query('SELECT departments.dpt_name AS Department, departments.id AS DepartmentId FROM departments', function(err, results) {
+  db.query('SELECT departments.id AS Id, departments.dpt_name AS Department FROM departments', function(err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL DEPARTMENTS IN DATABASE ===")
     // print results in a table
@@ -107,7 +108,7 @@ async function allDepartments() {
 //function for allRoles
 async function allRoles() {
   // sql query for database -> in query.sql file
-  db.query('SELECT roles.id AS RoleId, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department FROM roles JOIN departments ON roles.dpt_id = departments.id', function (err, results) {
+  db.query('SELECT roles.id AS Id, roles.salary AS Salary, roles.title AS Role,  departments.dpt_name AS Department FROM roles JOIN departments ON roles.dpt_id = departments.id', function (err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL ROLES IN DATABASE ===")
     // print results in a table
@@ -119,7 +120,7 @@ async function allRoles() {
 //function for allEmployees
 async function allEmployees() {
   // sql query for database -> in query.sql file
-  db.query('SELECT employees.id AS EmployeeId, employees.first_name AS FirstName, employees.last_name AS LastName, roles.title AS Role, roles.salary AS Salary, departments.dpt_name AS Department, employees.manager_id AS ManagerId FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.dpt_id = departments.id ORDER BY employees.id', function (err, results) {
+  db.query('SELECT employees.id AS Id, employees.first_name AS FirstName, employees.last_name AS LastName, roles.salary AS Salary, roles.title AS Role,  departments.dpt_name AS Department, employees.manager_id AS ManagerId FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.dpt_id = departments.id ORDER BY employees.id;', function (err, results) {
     if (err) throw err;
     console.log("=== NOW VIEWING ALL EMPLOYEES IN DATABASE ===")
     // print results in a table
@@ -202,6 +203,7 @@ function addRole() {
   })
 }
 
+
 //function for addEmployee
 function addEmployee() {
   //prompts -> user input
@@ -241,10 +243,12 @@ function addEmployee() {
   })
 }
 
+
 //function for updateEmployee
+// need to still do
 
 
-
+// function to exit out of app
 
 
 
