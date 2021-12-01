@@ -53,14 +53,13 @@ THEN I am prompted to select an employee to update and their new role and this i
 # Usage
 To access the Employee Tracker application, enter 'node server.js' into the terminal. From here, you will be shown a series of choices to choose from such as 'view all departments' and 'add an employee'. Use the keyboard arrow keys to move up and down the list and click on the choice you need.
 
----IMAGE
----IMAGE
----IMAGE
 
-Below is a video walkthrough of the application in action!
+Below are 3 short video walkthroughs of the application in action!
 ![view all video](./lib/images/viewall.gif)
 
 ![add a department video](./lib/images/adddepartment.gif)
+
+![add a role and employee video](./lib/images/addroleemployee.gif)
 
 
 # Packages

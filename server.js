@@ -150,7 +150,6 @@ function addDepartment() {
         console.log("=== DEPARTMENT HAS BEEN ADDDED ===")
         // print results in a table
         console.table(results);
-        addDepartment()
         init()
       })
     })
